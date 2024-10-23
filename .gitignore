@@ -1,0 +1,54 @@
+paths.R
+paths.do
+paths.m
+generated_data/
+raw_data/
+temp/
+logfiles/
+*.slf
+*.Rproj*
+.Rhistory
+paper/.texpadtmp/
+paper/figures/archive
+*_out.txt
+
+## Matlab temporary files
+*.asv
+
+
+## Core latex/pdflatex auxiliary files:
+*.aux
+*.lof
+*.log
+*.lot
+*.fls
+*.out
+*.toc
+*.fmt
+*.fot
+*.cb
+*.cb2
+*.nav
+*.snm
+
+## Intermediate documents:
+*.dvi
+*-converted-to.*
+
+
+
+## Bibliography auxiliary files (bibtex/biblatex/biber):
+*.bbl
+*.bcf
+*.blg
+*-blx.aux
+*-blx.bib
+*.brf
+*.run.xml
+
+## Build tool auxiliary files:
+*.fdb_latexmk
+*.synctex*
+*.synctex.gz
+*.synctex.gz(busy)
+*.pdfsync
