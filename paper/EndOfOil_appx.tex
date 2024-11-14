@@ -1,0 +1,355 @@
+
+\documentclass[12pt]{article}
+\usepackage{amsmath, graphicx, url, afterpage, setspace, amsthm, amssymb}
+
+% LOAD ENDFLOAT PACKAGE
+%\usepackage[nolists,tablesfirst]{endfloat}
+
+% LOAD CAPTION PACKAGE
+\usepackage[centerlast,bf]{caption}
+
+% LOAD SUBFIGURE PACKAGE
+\usepackage[position=above]{subfig}
+
+% LOAD ACCENTS PACKAGE
+%\usepackage{accents}
+
+% TABLE MULTI ROW PACKAGE
+\usepackage{multirow}
+
+\usepackage{booktabs}
+\usepackage{dcolumn}
+\usepackage{threeparttable}
+
+
+% TO REFERENCE ITEMS IN THE PAPER
+\usepackage{zref-xr}
+\zxrsetup{toltxlabel}
+\zexternaldocument*[paper-]{EndOfOil}
+
+% MAIN BIBLIOGRAPHY
+\usepackage[longnamesfirst]{natbib}
+%\usepackage{natbib}
+\bibliographystyle{aer}
+%\bibpunct{(}{)}{;}{a}{}{,}
+%\bibliographystyle{chicago}
+\newcommand\cites[1]{\citeauthor{#1}'s\ (\citeyear{#1})}
+
+%%%%% Directory path for input files (tables and single num tex files)
+\makeatletter
+\def\input@path{{../output/}}
+\makeatother
+%%%%% Directory path of image files
+\graphicspath{{../output/figures/}}
+
+% DEFINE FIGURE INSERT, CAPTION, AND NOTE COMMANDS
+\newlength{\figwidth}
+\newcommand{\figinpt}[2]{
+    \settowidth{\figwidth}{\includegraphics[#1]{#2}}
+    \centering
+    \includegraphics[#1]{#2}}
+    
+% START FIGURE COUNTING AT 2
+\renewcommand\thefigure{\arabic{figure}}
+\setcounter{figure}{1}
+
+\DeclareTextFontCommand{\fignotefont}{\normalfont\footnotesize}
+\newcommand{\fignote}[2][\linewidth]{
+    \begin{minipage}[]{#1}
+        \vspace{12pt}
+        \fignotefont{#2}
+    \end{minipage}}
+
+\DeclareTextFontCommand{\tabnotefont}{\normalfont\footnotesize}
+\newcommand{\tabnote}[2][\linewidth]{
+    \begin{minipage}[]{#1}
+        \vspace{12pt}
+        \tabnotefont{#2}
+    \end{minipage}}
+
+% ADJUST PAGE MARGINS
+\oddsidemargin 0in
+\evensidemargin 0in
+\textwidth 6.5in
+\textheight 9in
+\topmargin -.325in
+
+% DEFINE NEW THEOREM-LIKE ENVIRONMENTS
+\newtheorem*{ntheorem}{Theorem}
+\newtheorem{theorem}{Theorem}
+\newtheorem{exercise}{Exercise}
+\newtheorem{definition}{Definition}
+\newtheorem{result}{Result}
+\newtheorem*{nassumption}{Assumption}
+\newtheorem{assumption}{Assumption}
+\newtheorem{lemma}{Lemma}
+\newtheorem*{nlemma}{Lemma}
+
+
+\begin{document}
+
+\pagenumbering{roman}
+
+\pagenumbering{arabic}
+
+%\singlespace
+\onehalfspacing
+
+\appendix
+\setcounter{page}{1}
+\renewcommand{\thepage}{A-\arabic{page}}
+\renewcommand{\theequation}{A.\arabic{equation}}
+
+
+
+
+\section*{Online appendix for ``The End of Oil''}
+
+\section{Equivalent outcomes of the open-loop Nash-Cournot and Markov perfect equilibria} \label{sec:MPE}
+
+Here I show that the open-loop Nash-Cournot investment equilibrium defined in section \ref{paper-sec:model_oligopoly} of the main text yields the same outcomes as a Markov perfect equilibrium (MPE). The proof draws from arguments in \cite{eswaranlewis1985} regarding dynamic oligopoly; I apply those arguments here to the case of a dominant cartel and competitive fringe, in the case of an investment game.
+
+I first define the MPE. I then show that under the assumed behavior of the fringe firms, the MPE outcomes are the same as those from the open-loop game.
+
+The MPE that I adopt is similar to that proposed in \cite{benchekrounwithagen2012}, adapted here to incorporate capital investment and heterogeneity among the fringe firms. Let $q(t)$ and $R(t)$ denote the sets of state variables for the fringe firms at $t$ (e.g., $q(t)=\{q_1(t),q_2(t),...,q_{N-1}(t)\}$). $Q(t) = \sum_i q_i(t)$ as in the main text. Define the equilibrium as follows:
+\begin{enumerate}
+\item Each representative fringe firm $f$ chooses a strategy $d_f(t)=\phi_f(t,q_f(t),R_f(t))$ to maximize
+\begin{equation}
+\int_t^\infty e^{-r_f\tau} \left[q_f(\tau)P(\tau) - C_f(\phi_f(\tau,q_f(\tau),R_f(\tau))) \right] d\tau \label{eq:maximand_f}
+\end{equation}
+\noindent taking as given the time path of prices $\{P(\tau)\}$, its initial production rate $q_f(t)$, and its initial stock $R_f(t)$. $q_f(\tau)$ obeys $\dot{q}_f(\tau)=d_f(\tau)-\lambda_f q_f(\tau)$, and $R_f(\tau)$ obeys $\dot{R}_f(\tau)=-d_f(\tau)$. The firms must satisfy $d_f(\tau)\geq0$ and $R_f(\tau)\geq0$ $\forall \tau$.
+\item The dominant cartel $m$ chooses a strategy $d_m(t)=\phi_m(t,q_m(t),R_m(t),q(t),R(t))$ to maximize
+\begin{equation}
+\int_t^\infty e^{-r_m\tau} \left[q_m(\tau)P(Q(\tau),\tau) - C_m(\phi_m(\tau,q_m(\tau),R_m(\tau),q(\tau),R(\tau))) \right] d\tau \label{eq:maximand_f}
+\end{equation}
+\noindent taking as given the fringe firms' strategies $\phi_f(t,q_f(t),R_f(t))$ for $f\in\{1,...,N-1\}$, the initial production rates $q_m(t)$ and $q(t)$, and the initial stocks $R_m(t)$ and $R(t)$. $q_m(\tau)$ obeys $\dot{q}_m(\tau)=d_m(\tau)-\lambda_m q_m(\tau)$, and $R_m(\tau)$ obeys $\dot{R}_m(\tau)=-d_m(\tau)$. The cartel must satisfy $d_m(\tau)\geq0$ and $R_m(\tau)\geq0$ $\forall \tau$.
+\item The $P(t)$ equal inverse demand: $P(t)=P(Q(t),t)$ $\forall t$.
+\end{enumerate}
+
+I highlight that this definition assumes that fringe firms take the entire price path $\{P(t)\}$ as given, rather than just the current price $P(t)$ or the rule by which prices are determined by future production quantities. Consequently, fringe firms believe that neither their current decisions nor their future state variables influence the price path. This assumption follows \cite{benchekrounwithagen2012} and, as argued therein, is sensible because the alternatives would imply that fringe firms are unaware of their choices' impact (small as it may be) on the current price but are aware of how their stocks may influence future prices.
+
+It then follows that each fringe firm's strategy $\phi_f(t,q_f(t),R_f(t))$ devolves to a choice of drilling rate as a function of time $\phi_f(t)$, given $\{P(t)\}$, $q_f(0)$, and $R_f(0)$. Thus, the fringe firms' Markov strategies can be represented as open-loop strategies $\{d_f(t)\}$, with $d_f(t)=\phi_f(t)$.
+
+Then for the cartel, conditioning its strategy on the fringe's state variables $q(t)$ and $R(t)$ adds no value because given $\{P(t)\}$ and the initial states, the fringe firms' drilling time paths are fully determined. Thus, the cartel's problem can be simplified to a choice of strategy $\phi_m(t,q_m(t),R_m(t))$, taking the fringe firms' drilling paths $\{d_f(t)\}$ as given. But this problem is then the same as choosing a drilling rate as a function of time $\phi_m(t)$, given $\{d_f(t)\}$, $q_m(0)$, and $R_m(0)$, which is an open-loop strategy. We therefore have that for both the cartel and fringe firms, the equilibrium Markov strategies are just functions of time, implying that the outcomes of the Markov perfect and open-loop equilibria will coincide.
+
+I emphasize that the key to the above argument is the assumed myopic behavior of the fringe firms. Absent that, firms would have an incentive to influence each others' future actions via their choices regarding their own future state variables. These strategic interactions would cause equilibrium outcomes to differ across the two game definitions, as shown in simulations in \cite{eswaranlewis1985} and \cite{benchekrounwithagen2012} (though the quantitative differences tend to be minor). Here, however, the fact that there is only a single strategic player implies that the game in Markov strategies does not involve these strategic interactions, so that its equilibrium strategies collapse to open-loop strategies.
+
+\newpage
+
+
+\section{Computational algorithm} \label{sec:comp}
+
+I implement the model in discrete time, with a time interval of \input{snt/cal/monthsT.tex}months between periods. I simulate a total of \input{snt/cal/maxY.tex}years, which is sufficient for simulated production to decline to essentially zero in all specifications.\footnote{The one exception is the specification in which demand declines only to \input{snt/sim/Drem_dem85.tex}\unskip\% of its initial level (results shown in row 16 of table \ref{paper-tab:resultsagg}). I run this specification for \input{snt/sim/maxY_dem85.tex}years because the persistent low level of demand in the decline scenarios leads to a long period of low but non-trivial production.}
+
+The solution algorithm uses two nested loops, similar to the algorithm for production games proposed in \cite{salant1982}. It proceeds as follows:
+\begin{enumerate}
+\item Make an initial guess of the initial shadow values $\mu_{i0}$ for each resource type.
+\item Execute the inner loop to solve for equilibrium drilling, production, and prices given the provisional $\mu_{i0}$:
+\begin{enumerate}
+\item Make an initial guess of the equilibrium price and cartel production time series $\{P_t^0\}$ and $\{q_{mt}^0\}$.
+\item Compute the $\theta_{it}$ from the $\{P_t^0\}$, $\{q_{mt}^0\}$, and each resource's decline and discount rate, using equation (\ref{paper-eq:thetam}) for $m$ and equation (\ref{paper-eq:theta}) for each fringe type $f$.
+\item In each period $t$, use the first-order condition (\ref{paper-eq:FOCD}) to solve for the $d_{it}$, given the $\theta_{it}$ and the current shadow values $\mu_{it}$ (in turn based on the provisional initial shadow values $\mu_{i0}$).
+\item Compute the production paths $\{q_{it}\}$ using the discrete time analogs of the equations of motion $\dot{q}_{it}=d_{it}-\lambda_iq_{it}$, the $q_{i0}$, and the $\{d_{it}\}$ from the previous step. Sum across resource types to obtain the aggregate production time series $\{Q_{t}\}$.
+\item Compute a new price series $\{P_t\}$ using the demand curve $P(Q_t,t)$ and the $\{Q_{t}\}$ from the previous step.
+\item For each $t$, compute $P'_t=(1-\phi)P_t^0+\phi P_t$ and $q'_{mt}=(1-\phi)q_{mt}^0+\phi q_{mt}$, where $\phi\in(0,1]$. I use $\phi=$ \input{snt/cal/gain.tex}\unskip. Larger values of $\phi$ converge more quickly but can lead to numerical instability.
+\item If $\{P'_t\}$ is sufficiently close to $\{P_t\}$ in the sup norm, stop. Otherwise, return to step (a), replacing the $\{P_t^0\}$ and $\{q_{mt}^0\}$ with the $\{P'_t\}$ and $\{q'_{mt}\}$. I use a tolerance of \input{snt/cal/ptol.tex}\$/bbl.
+\end{enumerate}
+\item Solve the mixed complementarity problem for the $\mu_{i0}$. Specifically, given a set of provisional shadow values $\mu_{i0}$, let $Z_i$ denote the difference between initial reserves $R_{i0}$ for each resource and cumulative drilling computed from the inner loop of the routine. The equilibrium shadow values are then those that simultaneously satisfy: (1) $\mu_{i0}\geq0$; (2) $Z_i\geq0$; and (3) $\mu_{i0}Z_i=0$, for all $i$. I solve these transversality conditions simultaneously using a tolerance of \input{snt/cal/stol.tex}billion bbl on the $Z_i$. In practice I search on the $\log\mu_{i0}$ rather than the $\mu_{i0}$; I treat the condition $\mu_{i0}=0$ as being satisfied for any resource type whenever $\mu_{i0}<$ \input{snt/cal/mutol.tex}\$ per mmbbl/d.
+\end{enumerate}
+
+
+\newpage
+
+\section{Additional tables and figures} \label{sec:results}
+
+\renewcommand{\thefigure}{C.\arabic{figure}}
+\renewcommand{\thetable}{C.\arabic{table}}
+
+%% TABLE OF DRILLING COST ELASTICITIES
+\begin{table}[!h]
+\centering
+\caption{Calibrated drilling cost elasticities}
+\input{tables/TabCE.tex}
+\label{tab:costelast}
+\fignote[0.95\textwidth]{Note: Type I is core OPEC, type II is non-core OPEC+, type III is conventional non-OPEC, and type IV is shale. The drilling cost elasticities are evaluated at the 2023 investment rate for each type. The row numbering corresponds to the specifications presented in tables \ref{paper-tab:resultsagg} and \ref{paper-tab:resultsagg_alt} in the main text. Rows not included here are specifications that use the same calibrated values for the $\gamma_i$ as the reference case, by construction. Demand growth in the baseline simulations is through 2030. The last row uses values of \$\input{snt/sim/alpha0_highera_1.tex}\unskip, \$\input{snt/sim/alpha0_highera_2.tex}\unskip, \$\input{snt/sim/alpha0_highera_3.tex}\unskip, and \$\input{snt/sim/alpha0_highera_4.tex}\unskip/bbl for the cost function intercepts $a_i$ for $i=$ I, II, III, and IV, respectively.}
+\end{table}
+
+\newpage
+
+% FIGURE: ALL RESOURCES DECLINE AT 8%
+\begin{figure}[!h]
+\captionsetup{width=1.0\textwidth}
+\caption{Simulation results, aggregated across resource types.\\ Model in which production from all resources declines at 8\% per year}
+\figinpt{width=0.8\textwidth,clip}{comboplot_dec08.pdf}
+\fignote[0.9\textwidth]{Note: Figure corresponds to row 2 of table \ref{paper-tab:resultsagg} in the main text. ``mmbbl/d'' denotes millions of barrels per day. In the demand decline counterfactuals, the demand curve shifts inward to zero over \input{snt/sim/Ttz_ref.tex}years.}
+\label{fig:comboplot_dec08}
+\end{figure}
+
+\newpage
+
+% FIGURE: ALL RESOURCES DECLINE AT 6%
+\begin{figure}[!h]
+\captionsetup{width=1.0\textwidth}
+\caption{Simulation results, aggregated across resource types.\\ Model in which production from all resources declines at 6\% per year}
+\figinpt{width=0.8\textwidth,clip}{comboplot_dec06.pdf}
+\fignote[0.9\textwidth]{Note: Figure corresponds to row 3 of table \ref{paper-tab:resultsagg} in the main text. ``mmbbl/d'' denotes millions of barrels per day. In the demand decline counterfactuals, the demand curve shifts inward to zero over \input{snt/sim/Ttz_ref.tex}years.}
+\label{fig:comboplot_dec06}
+\end{figure}
+
+\newpage
+
+% FIGURE: ALL RESOURCES DECLINE AT 30%
+\begin{figure}[!t]
+\captionsetup{width=1.0\textwidth}
+\caption{Simulation results, aggregated across resource types.\\ Model in which production from all resources declines at 30\% per year}
+\figinpt{width=0.8\textwidth,clip}{comboplot_dec30.pdf}
+\fignote[0.9\textwidth]{Note: Figure corresponds to row 4 of table \ref{paper-tab:resultsagg} in the main text. ``mmbbl/d'' denotes millions of barrels per day. In the demand decline counterfactuals, the demand curve shifts inward to zero over \input{snt/sim/Ttz_ref.tex}years.}
+\label{fig:comboplot_dec30}
+\end{figure}
+
+\newpage
+
+% FIGURE: NO INVESTMENT
+\begin{figure}[!t]
+\captionsetup{width=1.0\textwidth}
+\caption{Simulation results, aggregated across resource types.\\ Model in which there are no investment dynamics}
+\figinpt{width=0.8\textwidth,clip}{comboplot_n.pdf}
+\fignote[0.9\textwidth]{Note: Figure corresponds to row 5 of table \ref{paper-tab:resultsagg} in the main text. ``mmbbl/d'' denotes millions of barrels per day. In the demand decline counterfactuals, the demand curve shifts inward to zero over \input{snt/sim/Ttz_ref.tex}years.}
+\label{fig:comboplot_n}
+\end{figure}
+
+\newpage
+
+% FIGURE: HIGH RESERVES
+\begin{figure}[!t]
+\captionsetup{width=1.0\textwidth}
+\caption{Simulation results, aggregated across resource types.\\ Model in which initial reserves are high}
+\figinpt{width=0.8\textwidth,clip}{comboplot_highres.pdf}
+\fignote[0.9\textwidth]{Note: Figure corresponds to row 6 of table \ref{paper-tab:resultsagg} in the main text. ``mmbbl/d'' denotes millions of barrels per day. In the demand decline counterfactuals, the demand curve shifts inward to zero over \input{snt/sim/Ttz_ref.tex}years.}
+\label{fig:comboplot_highres}
+\end{figure}
+
+\newpage
+
+% FIGURE: LOW RESERVES
+\begin{figure}[!t]
+\captionsetup{width=1.0\textwidth}
+\caption{Simulation results, aggregated across resource types.\\ Model in which initial reserves are low}
+\figinpt{width=0.8\textwidth,clip}{comboplot_lowres.pdf}
+\fignote[0.9\textwidth]{Note: Figure corresponds to row 7 of table \ref{paper-tab:resultsagg} in the main text. ``mmbbl/d'' denotes millions of barrels per day. In the demand decline counterfactuals, the demand curve shifts inward to zero over \input{snt/sim/Ttz_ref.tex}years.}
+\label{fig:comboplot_lowres}
+\end{figure}
+
+\newpage
+
+% FIGURE: ALL DISCOUNT AT 9%
+\begin{figure}[!t]
+\captionsetup{width=1.0\textwidth}
+\caption{Simulation results, aggregated across resource types.\\ Model in which all resource types discount at 9\%}
+\figinpt{width=0.8\textwidth,clip}{comboplot_dall09.pdf}
+\fignote[0.9\textwidth]{Note: Figure corresponds to row 8 of table \ref{paper-tab:resultsagg} in the main text. ``mmbbl/d'' denotes millions of barrels per day. In the demand decline counterfactuals, the demand curve shifts inward to zero over \input{snt/sim/Ttz_ref.tex}years.}
+\label{fig:comboplot_dall09}
+\end{figure}
+
+\newpage
+
+% FIGURE: ALL DISCOUNT AT 3%
+\begin{figure}[!t]
+\captionsetup{width=1.0\textwidth}
+\caption{Simulation results, aggregated across resource types.\\ Model in which all resource types discount at 3\%}
+\figinpt{width=0.8\textwidth,clip}{comboplot_dall03.pdf}
+\fignote[0.9\textwidth]{Note: Figure corresponds to row 9 of table \ref{paper-tab:resultsagg} in the main text. ``mmbbl/d'' denotes millions of barrels per day. In the demand decline counterfactuals, the demand curve shifts inward to zero over \input{snt/sim/Ttz_ref.tex}years.}
+\label{fig:comboplot_dall03}
+\end{figure}
+
+\newpage
+
+% FIGURE: NO INVESTMENT, LOW RESERVES
+\begin{figure}[!t]
+\captionsetup{width=1.0\textwidth}
+\caption{Simulation results, aggregated across resource types.\\ Model in which there are no investment dynamics and initial reserves are low}
+\figinpt{width=0.8\textwidth,clip}{comboplot_n_lowres.pdf}
+\fignote[0.9\textwidth]{Note: Figure corresponds to row 10 of table \ref{paper-tab:resultsagg} in the main text. ``mmbbl/d'' denotes millions of barrels per day. In the demand decline counterfactuals, the demand curve shifts inward to zero over \input{snt/sim/Ttz_ref.tex}years.}
+\label{fig:comboplot_n_lowres}
+\end{figure}
+
+\newpage
+
+% FIGURE: NO INVESTMENT, 3% DISCOUNTING
+\begin{figure}[!t]
+\captionsetup{width=1.0\textwidth}
+\caption{Simulation results, aggregated across resource types.\\ Model in which there are no investment dynamics and all resource types discount at 3\%}
+\figinpt{width=0.8\textwidth,clip}{comboplot_n_dall03.pdf}
+\fignote[0.9\textwidth]{Note: Figure corresponds to row 11 of table \ref{paper-tab:resultsagg} in the main text. ``mmbbl/d'' denotes millions of barrels per day. In the demand decline counterfactuals, the demand curve shifts inward to zero over \input{snt/sim/Ttz_ref.tex}years.}
+\label{fig:comboplot_n_dall03}
+\end{figure}
+
+\newpage
+
+% FIGURE: 50 YEAR DECLINE
+\begin{figure}[!t]
+\captionsetup{width=1.0\textwidth}
+\caption{Simulation results, aggregated across resource types.\\ Model in which demand declines over 50 years}
+\figinpt{width=0.8\textwidth,clip}{comboplot_T50.pdf}
+\fignote[0.9\textwidth]{Note: Figure corresponds to row 12 of table \ref{paper-tab:resultsagg} in the main text. ``mmbbl/d'' denotes millions of barrels per day. In the demand decline counterfactuals, the demand curve shifts inward to zero over \input{snt/sim/Ttz_T50.tex}years.}
+\label{fig:comboplot_T50}
+\end{figure}
+
+\newpage
+
+% FIGURE: 100 YEAR DECLINE
+\begin{figure}[!t]
+\captionsetup{width=1.0\textwidth}
+\caption{Simulation results, aggregated across resource types.\\ Model in which demand declines over 100 years}
+\figinpt{width=0.8\textwidth,clip}{comboplot_T100.pdf}
+\fignote[0.9\textwidth]{Note: Figure corresponds to row 13 of table \ref{paper-tab:resultsagg} in the main text. ``mmbbl/d'' denotes millions of barrels per day. In the demand decline counterfactuals, the demand curve shifts inward to zero over \input{snt/sim/Ttz_T100.tex}years.}
+\label{fig:comboplot_T100}
+\end{figure}
+
+\newpage
+
+% FIGURE: DELAYED DECLINE
+\begin{figure}[!t]
+ \label{fig:comboplot_del05}
+\captionsetup{width=1.0\textwidth}
+\caption{Simulation results, aggregated across resource types.\\ Model in which the start of the demand decline is delayed 5 years}
+\figinpt{width=0.8\textwidth,clip}{comboplot_del05.pdf}
+\fignote[0.9\textwidth]{Note: Figure corresponds to row 14 of table \ref{paper-tab:resultsagg} in the main text. ``mmbbl/d'' denotes millions of barrels per day. In the demand decline counterfactuals, demand follows its baseline trajectory over \input{snt/sim/Tdel_del05.tex}years and then declines inward, reaching zero \input{snt/sim/Ttz_ref.tex}years after the start of the simulation.}
+
+\end{figure}
+
+\newpage
+
+% FIGURE: DELAYED DECLINE, 9% DISCOUNTING
+\begin{figure}[!t]
+\captionsetup{width=1.0\textwidth}
+\caption{Simulation results, aggregated across resource types.\\ Model in which the start of the demand decline is delayed 5 years and all resource types discount at 9\%}
+\figinpt{width=0.8\textwidth,clip}{comboplot_del05_dall09.pdf}
+\fignote[0.9\textwidth]{Note: Figure corresponds to row 15 of table \ref{paper-tab:resultsagg} in the main text. ``mmbbl/d'' denotes millions of barrels per day. In the demand decline counterfactuals, demand follows its baseline trajectory over \input{snt/sim/Tdel_del05.tex}years and then declines inward, reaching zero \input{snt/sim/Ttz_ref.tex}years after the start of the simulation.}
+\label{fig:comboplot_del05}
+\end{figure}
+
+\newpage
+
+% FIGURE: PARTIAL DECLINE
+\begin{figure}[!t]
+\captionsetup{width=1.0\textwidth}
+\caption{Simulation results, aggregated across resource types.\\ Model in which demand declines incompletely, leaving 15\% of initial demand in perpetuity}
+\figinpt{width=0.8\textwidth,clip}{comboplot_dem85.pdf}
+\fignote[0.9\textwidth]{Note: Figure corresponds to row 16 of table \ref{paper-tab:resultsagg} in the main text. ``mmbbl/d'' denotes millions of barrels per day. In the demand decline counterfactuals, the demand curve shifts inward to zero on the same trajectory as in the reference case (an \input{snt/sim/Ttz_ref.tex}\unskip-year decline), but the decline stops when demand is at \input{snt/sim/Drem_dem85.tex}\unskip\% of its initial level.}
+\label{fig:comboplot_dem85}
+\end{figure}
+
+\newpage
+\clearpage
+
+\bibliography{EndOfOilrefs}
+
+
+
+\end{document}
+
+
+
+
+
